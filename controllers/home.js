@@ -5,7 +5,7 @@ const User = require('../models');
 router.get('/', (req, res) => {
     console.log(req.session);
 
-    User.findAll({})
+    Books.findAll({})
     .then(dbPostData => {
           //pass a single post object into the homepage template
           console.log(dbPostData[0]);
