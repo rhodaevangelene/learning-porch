@@ -1,7 +1,4 @@
-<div>
-    <img src="../images/banner.jpg" class="img-fluid" alt="hero">
-</div>
-
+{{#if loggedIn}}
 <div>
     <div class="card" style="width: 18rem;">
         <div class="card-body">
@@ -27,3 +24,35 @@
         </div>
     </div>
 </div>
+
+{{else}}
+<div>
+    <form class="sign-form">
+        <div class="mb-3">
+            <label for="exampleInputEmail" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputUsername" class="form-label">Username</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1">
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+        <button type="submit" id="login" class="btn btn-primary">Login</button>
+        <button type="submit" id="logout" class="btn btn-primary">Sign up</button>
+    </form>
+</div>
+
+{{/if}}
+
+{{#if loggedIn}}
+<script src="/javascript/logout.js"></script>
+{{else}}
+<script src="/javascript/login.js"></script>
+{{/if}}

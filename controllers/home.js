@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const User = require('../models');
+const { User, Books } = require('../models');
 
 router.get('/', (req, res) => {
     console.log(req.session);
 
-    Books.findAll({})
+    User.findAll({})
     .then(dbPostData => {
           //pass a single post object into the homepage template
           console.log(dbPostData[0]);
