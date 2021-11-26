@@ -4,7 +4,7 @@ const apiRoutes = require('./api');
 
 const homeRoutes = require('./home.js');
 
-router.use('/api', apiRoutes);
+router.use('/users', apiRoutes);
 router.use('/', homeRoutes);
 
 router.use((req, res) => {

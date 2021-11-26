@@ -24,35 +24,36 @@
         </div>
     </div>
 </div>
-
+<script src="../javascript/logout.js"></script>
 {{else}}
-<div>
-    <form class="sign-form">
+    <form class="signin-form">
         <div class="mb-3">
-            <label for="exampleInputEmail" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputUsername" class="form-label">Username</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <label for="Email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="Email" aria-describedby="emailHelp">
         </div>
         <div class="mb-3">
-            <label for="exampleInputPassword" class="form-label">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
-        </div>
-        <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div>
+            <label for="Password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="Password">
+        </div>  
         <button type="submit" id="login" class="btn btn-primary">Login</button>
-        <button type="submit" id="logout" class="btn btn-primary">Sign up</button>
+        {{!-- <a href="/signup" class="btn btn-primary">signup</a> --}}
     </form>
-</div>
 
-{{/if}}
-
-{{#if loggedIn}}
-<script src="/javascript/logout.js"></script>
-{{else}}
-<script src="/javascript/login.js"></script>
+    <form class="signup-form">
+        <div class="mb-3">
+            <label for="signup-username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="singup-username" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="signup-email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="signup-email" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="signup-password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="signup-password">
+        </div>  
+        <button type="submit" id="signup" class="btn btn-primary">Sign up</button>
+    </form>
+    
+<script src="../javascript/login.js"></script>
 {{/if}}
