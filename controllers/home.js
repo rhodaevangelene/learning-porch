@@ -35,4 +35,22 @@ router.get('/signup', (req, res) => {
   res.render('signup');
 });
 
+router.get('/bookshelf', (req, res) => {
+  if (req.session.loggedIn) {
+    res.render('bookshelf');
+      return;
+  }
+
+  
+});
+
+router.get('/booklist', (req, res) => {
+  if (req.session.loggedIn) {
+    res.render('booklist');
+      return;
+  }
+
+  
+});
+
 module.exports = router;
