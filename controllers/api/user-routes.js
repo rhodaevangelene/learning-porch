@@ -185,4 +185,45 @@ router.post('/:id/book', async (req, res) => {
     res.json(_book);
   });
 
+// PUT /users/1/books
+// Update Book for a user
+// Sample Request to update read state { "id": 2, "read": true }
+// Sample Request to update title, author and read state { "id": 2, "book_title": "Title 2", "author_name": "Author 2", "read": true }
+router.put('/:id/book', async (req, res) => {
+  console.log("Updating book for user: ", req.params.id);
+  console.log(req.body);
+
+  const _book = await Books.update(req.body, 
+    {
+      where: {
+        id: req.body.id,
+        user_id: req.params.id
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+  res.json(_book);
+});
+
+// DELETE /users/1/books/1
+router.delete('/:id/book/:book_id', async (req, res) => {
+  console.log("Deleting Book: ", req.params.book_id);
+  console.log(req.body);
+
+  const _book = await Books.destroy(
+    {
+      where: {
+        id: req.params.book_id,
+        user_id: req.params.id
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+  res.json(_book);
+});
+
 module.exports = router;
