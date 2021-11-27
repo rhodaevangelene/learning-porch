@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { BOOLEAN } = require('sequelize/dist');
 const { User, Books } = require('../../models');
 
 // GET /api/users
@@ -141,6 +142,47 @@ router.delete('/:id', (req, res) => {
         console.log(err);
         res.status(500).json(err);
       });
+  });
+
+// GET /users/1/books
+// GET all books for user
+router.get('/:id/book', (req, res) => {
+  console.log("Listing all books for user: ", req.params.id);
+  Books.findAll({
+    where: {
+      user_id: req.params.id
+    },
+  })
+    .then(dbUserData => {
+      if (!dbUserData) {
+        res.status(404).json({ message: 'No books found for this user' });
+        return;
+      }
+      res.json(dbUserData);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
+// POST /users/1/books
+// Add Book for a user {}
+router.post('/:id/book', async (req, res) => {
+    console.log("Adding new book for user: ", req.params.id);
+    console.log(req.body);
+
+    var book = req.body;
+    book.user_id = req.params.id;
+    book.read = false;
+
+    const _book = await Books.create(book)
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+    
+    res.json(_book);
   });
 
 module.exports = router;
