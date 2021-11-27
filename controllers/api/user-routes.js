@@ -167,7 +167,8 @@ router.get('/:id/book', (req, res) => {
 });
 
 // POST /users/1/books
-// Add Book for a user {}
+// Add Book for a user
+// Sample Request: { "book_title": "title 4", "author_name": "author 4" }
 router.post('/:id/book', async (req, res) => {
     console.log("Adding new book for user: ", req.params.id);
     console.log(req.body);
