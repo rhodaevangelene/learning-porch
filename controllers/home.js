@@ -35,22 +35,26 @@ router.get('/signup', (req, res) => {
   res.render('signup');
 });
 
-router.get('/bookshelf', (req, res) => {
+router.get('/courses', (req, res) => {
   if (req.session.loggedIn) {
-    res.render('bookshelf');
+      res.redirect('/');
       return;
   }
 
-  
+  res.render('homepage');
+});
+
+
+router.get('/bookshelf', (req, res) => {
+  res.render('bookshelf', {
+    loggedIn: req.session.loggedIn
+  });
 });
 
 router.get('/booklist', (req, res) => {
-  if (req.session.loggedIn) {
-    res.render('booklist');
-      return;
-  }
-
-  
+  res.render('booklist', {
+    loggedIn: req.session.loggedIn
+  });
 });
 
 module.exports = router;
