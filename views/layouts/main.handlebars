@@ -10,6 +10,7 @@
 
     <body>
         <div>
+            {{#if loggedIn}}
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">The Learning Porch</a>
@@ -34,6 +35,7 @@
                 </div>
             </div>
             </nav>
+            {{/if}}
             <main>
                 {{{ body }}}
             </main>
