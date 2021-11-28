@@ -2,6 +2,74 @@
   class="bg-image p-5 position"
   style="background-image: url('../images/banner.jpg');">
 </div>
-<h1>Hello</h1>
-
+<div class="container">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body p-5">
+            <h5 class="card-title">Book List</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">All Books</li>
+                <li class="list-group-item">Books to Read</li>
+                <li class="list-group-item">Read Books</li>
+            </ul>
+        </div>
+    </div>
+    <div>
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">Read</th>
+                <th scope="col">Read Options</th>
+                <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <th scope="row">1</th>
+                <td>Harry Potter</td>
+                <td>J.K Rowling</td>
+                <td>True</td>
+                <td>
+                    <select id="Select" class="form-select">
+                        <option>Read Option</option>
+                        <option>Read</option>
+                        <option>Not Read</option>
+                    </select>
+                </td>
+                <td><button type="button" class="btn btn-danger">X</button></td>
+                </tr>
+                <tr>
+                <th scope="row">2</th>
+                <td>title</td>
+                <td>Author</td>
+                <td>false</td>
+                <td>
+                    <select id="Select" class="form-select">
+                        <option>Read Option</option>
+                        <option>Read</option>
+                        <option>Not Read</option>
+                    </select>
+                </td>
+                <td><button type="button" class="btn btn-danger">X</button></td>
+                </tr>
+                <tr>
+                <th scope="row">3</th>
+                <td>Larry the Bird</td>
+                <td>Author</td>
+                <td>true</td>
+                <td>
+                    <select id="Select" class="form-select">
+                        <option>Read Option</option>
+                        <option>Read</option>
+                        <option>Not Read</option>
+                    </select>
+                </td>
+                <td><button type="button" class="btn btn-danger">X</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 <script src="../javascript/logout.js"></script>
