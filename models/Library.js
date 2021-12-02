@@ -24,6 +24,10 @@ Library.init(
                 model: 'books',
                 key: 'id'
             }
+        },
+        read: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
         }
     },
     {
