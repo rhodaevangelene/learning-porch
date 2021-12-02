@@ -57,4 +57,25 @@ router.get('/booklist', (req, res) => {
   });
 });
 
+ 
+const items = [];
+
+router.get("/notes", function (req, res) {
+  
+  const today = new Date();
+  const options = {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  };
+  const day = today.toLocaleDateString("en-US", options);
+  res.render("list.ejs", {loggedIn: req.session.loggedIn, kindOfDay: day, newListItems: items });
+});
+
+router.post("/notes", function (req, res) {
+  item = req.body.newItem;
+  items.push(item);
+  res.redirect("/notes");
+});
+
 module.exports = router;
