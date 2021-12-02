@@ -1,38 +1,39 @@
-<div
-  class="bg-image p-5 position"
-  style="background-image: url('../images/banner.jpg');">
+<div class="bg-image p-5 position" style="background-image: url('../images/banner.jpg');">
 </div>
 <div class="container m-5">
     <div class="row">
-        <div class="col-6">
+        <div class="col-12">
             <form class="p-5 border border-4 border-light rounded">
-                <h3>Search for a Book, Author, or both:</h3>
+                <h3>Search for a Book by Title</h3>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Book Title</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Author</label>
-                    <input type="text" class="form-control" id="exampleInputPassword1">
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        placeholder="Title">
                 </div>
                 <button type="submit" class="btn btn-primary">Search</button>
             </form>
-        </div>
-        <div class="col-6">
-            <form class="p-5 border border-4 border-light rounded">
-                <h3>Search by Genre:</h3>
-                <div class="mb-3">
-                    <label for="Select" class="form-label">Genre</label>
-                    <select id="Select" class="form-select">
-                        <option>Select</option>
-                        <option>Adventure</option>
-                        <option>Educational</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Search</button>
-            </form>
+            <br/>
+            <h4>Book Results</h4>
+            <table class="table" id="foo">
+                <thead>
+                    <th>ID</th>
+                    <th>Book Title</th>
+                    <th>Author</th>
+                    <th>Actions</th>
+                </thead>
+                <tbody>
+                <tbody>
+            </table>
+
+            <template id="dataRow">
+                <tr>
+                    <td>{value1}</td>
+                    <td>{value2}</td>
+                    <td>{value3}</td>
+                    <td>{value4}</td>
+                </tr>
+            </template>
         </div>
     </div>
 </div>
-
 <script src="../javascript/logout.js"></script>
+<script src="../javascript/books.js"></script>

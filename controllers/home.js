@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { User, Books, Library } = require('../models');
+const { Op } = require("sequelize");
 
 router.get('/', (req, res) => {
     console.log(req.session);
@@ -78,6 +79,28 @@ router.get('/booklist', (req, res) => {
   }
 });
 
+router.get('/books', (req, res) => {
+  console.log("Listing all books: ");
+  Books.findAll({
+    where: {
+      book_title: {
+        [Op.like]: '%' + req.query.s + '%%'
+      }
+    },
+    limit: 20
+  })
+    .then(dbUserData => {
+      if (!dbUserData) {
+        res.status(404).json({ message: 'No books found for this user' });
+        return;
+      }
+      res.json(dbUserData);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
  
 const items = [];
 

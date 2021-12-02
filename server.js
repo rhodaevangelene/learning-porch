@@ -31,8 +31,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session(sess));
 app.use(require('./controllers/'));
 
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars', 'ejs');
 app.engine('handlebars', exphbs.create({
   defaultLayout: "main",
   runtimeOptions: {
@@ -40,7 +38,7 @@ app.engine('handlebars', exphbs.create({
     allowProtoMethodsByDefault: true,
   },
 }).engine);
-app.set('view engine', 'handlebars')
+app.set('view engine', 'handlebars', 'ejs');
 
 // turn on routes
 app.use(routes);
