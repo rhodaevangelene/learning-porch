@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { json } = require('sequelize/dist');
 const sequelize = require('../config/connection');
 const { User, Books, Library } = require('../models');
 
@@ -7,7 +8,7 @@ router.get('/', (req, res) => {
 
     User.findAll({})
     .then(dbPostData => {
-          //pass a single post object into the homepage template
+          //pass a single object into the homepage template
             res.render('homepage', {
               loggedIn: req.session.loggedIn
             });
@@ -46,9 +47,25 @@ router.get('/courses', (req, res) => {
 
 
 router.get('/bookshelf', (req, res) => {
-  res.render('bookshelf', {
-    loggedIn: req.session.loggedIn
-  });
+  if(req.session.loggedIn) {
+    console.log("finding all books");
+    Books.findAll({})
+    .then(response => {
+      if(!response) {
+        res.status(404).json({ message: 'No books found' });
+        return;
+      }
+      console.log("allbooks added " + JSON.stringify(response));
+      res.render('bookshelf', {books: response, loggedIn: req.session.loggedIn});
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+  }
+  else {
+    res.status(401).end();
+  }
 });
 
 router.get('/booklist', (req, res) => {

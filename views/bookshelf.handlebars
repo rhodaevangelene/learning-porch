@@ -11,8 +11,9 @@
                     <label for="Select" class="form-label">Books Available:</label>
                     <select id="Select" class="form-select">
                         <option>Select</option>
-                        <option>Adventure</option>
-                        <option>Educational</option>
+                        {{#each books}}
+                        <option>{{book_title}}</option>
+                        {{/each}}
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Add Book</button>
