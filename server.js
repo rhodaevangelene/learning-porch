@@ -33,6 +33,14 @@ app.use(require('./controllers/'));
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars', 'ejs');
+app.engine('handlebars', exphbs.create({
+  defaultLayout: "main",
+  runtimeOptions: {
+    allowProtoPropertiesByDefault: true,
+    allowProtoMethodsByDefault: true,
+  },
+}).engine);
+app.set('view engine', 'handlebars')
 
 // turn on routes
 app.use(routes);

@@ -2,12 +2,12 @@ const User = require("./User");
 const Books = require("./Books");
 const Library = require("./Library");
 
-User.hasMany(Books, {
-    foreignKey: 'user_id'
+User.belongsToMany(Books, {
+    through: 'library'
 });
 
-Books.hasMany(User, {
-    foreignKey: 'books_id'
+Books.belongsToMany(User, {
+    through: 'library'
 })
 
 module.exports = { User, Books, Library };

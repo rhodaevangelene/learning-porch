@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { User, Books } = require('../models');
+const { User, Books, Library } = require('../models');
 
 router.get('/', (req, res) => {
     console.log(req.session);
@@ -54,18 +54,19 @@ router.get('/bookshelf', (req, res) => {
 router.get('/booklist', (req, res) => {
   if(req.session.loggedIn) {
     console.log("Finding books for user: " + req.session.user_id);
-    Books.findAll({
+    User.findOne({
       where: {
-        user_id: req.session.user_id
+        id: req.session.user_id
       },
+      include: Books
     })
       .then(dbUserData => {
         if (!dbUserData) {
           res.status(404).json({ message: 'No books found for this user' });
           return;
         }
-        console.log("Books: " + JSON.stringify(dbUserData));
-        res.render('booklist', {books: dbUserData.map(dbUserData => dbUserData.toJSON()), loggedIn: req.session.loggedIn});
+        console.log("Books: " + JSON.stringify(dbUserData.Books));
+        res.render('booklist', {books: dbUserData.Books, loggedIn: req.session.loggedIn});
       })
       .catch(err => {
         console.log(err);
