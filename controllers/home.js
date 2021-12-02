@@ -52,9 +52,29 @@ router.get('/bookshelf', (req, res) => {
 });
 
 router.get('/booklist', (req, res) => {
-  res.render('booklist', {
-    loggedIn: req.session.loggedIn
-  });
+  if(req.session.loggedIn) {
+    console.log("Finding books for user: " + req.session.user_id);
+    Books.findAll({
+      where: {
+        user_id: req.session.user_id
+      },
+    })
+      .then(dbUserData => {
+        if (!dbUserData) {
+          res.status(404).json({ message: 'No books found for this user' });
+          return;
+        }
+        console.log("Books: " + JSON.stringify(dbUserData));
+        res.render('booklist', {books: dbUserData.map(dbUserData => dbUserData.toJSON()), loggedIn: req.session.loggedIn});
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  }
+  else {
+    res.status(401).end();
+  }
 });
 
  

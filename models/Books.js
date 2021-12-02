@@ -19,17 +19,17 @@ Books.init(
             type: DataTypes.STRING,
             allowNull: false
         },
-        read: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-        },
-        user_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'user',
-                key: 'id'
-            }
-        }
+        // read: {
+        //     type: DataTypes.BOOLEAN,
+        //     allowNull: false,
+        // },
+        // user_id: {
+        //     type: DataTypes.INTEGER,
+        //     references: {
+        //         model: 'user',
+        //         key: 'id'
+        //     }
+        // }
     },
     {
         sequelize,

@@ -20,54 +20,32 @@
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
                 <th scope="col">Author</th>
-                <th scope="col">Read</th>
                 <th scope="col">Read Options</th>
                 <th scope="col">Delete</th>
                 </tr>
             </thead>
             <tbody>
+                {{#each books}}
                 <tr>
-                <th scope="row">1</th>
-                <td>Harry Potter</td>
-                <td>J.K Rowling</td>
-                <td>True</td>
+                <th scope="row">{{id}}</th>
+                <td>{{book_title}}</td>
+                <td>{{author_name}}</td>
                 <td>
+                    {{#if read}}
                     <select id="Select" class="form-select">
-                        <option>Read Option</option>
-                        <option>Read</option>
+                        <option selected="true">Read</option>
                         <option>Not Read</option>
                     </select>
+                    {{else}}
+                    <select id="Select" class="form-select">
+                        <option>Read</option>
+                        <option selected="true">Not Read</option>
+                    </select>
+                    {{/if}}
                 </td>
                 <td><button type="button" class="btn btn-danger">X</button></td>
                 </tr>
-                <tr>
-                <th scope="row">2</th>
-                <td>title</td>
-                <td>Author</td>
-                <td>false</td>
-                <td>
-                    <select id="Select" class="form-select">
-                        <option>Read Option</option>
-                        <option>Read</option>
-                        <option>Not Read</option>
-                    </select>
-                </td>
-                <td><button type="button" class="btn btn-danger">X</button></td>
-                </tr>
-                <tr>
-                <th scope="row">3</th>
-                <td>Larry the Bird</td>
-                <td>Author</td>
-                <td>true</td>
-                <td>
-                    <select id="Select" class="form-select">
-                        <option>Read Option</option>
-                        <option>Read</option>
-                        <option>Not Read</option>
-                    </select>
-                </td>
-                <td><button type="button" class="btn btn-danger">X</button></td>
-                </tr>
+                  {{/each}}
             </tbody>
         </table>
     </div>
