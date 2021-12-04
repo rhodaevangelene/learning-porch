@@ -3,46 +3,42 @@
   style="background-image: url('../images/banner.jpg');">
 </div>
 <div class="container mt-5">
-    <div class="card" style="width: 18rem;">
-        <div class="card-body p-5">
-            <h5 class="card-title">Book List</h5>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">All Books</li>
-                
-            </ul>
-        </div>
-    </div>
-    <div>
-        <table class="table mt-5">
+    <h3>Your Booklist</h3>
+    <div class="card p-2 border border-3 rounded">
+        <table class="table mt-1">
             <thead>
                 <tr>
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
                 <th scope="col">Author</th>
-                <th scope="col">Read Options</th>
+                <th scope="col">Status</th>
                 <th scope="col">Delete</th>
                 </tr>
             </thead>
             <tbody>
                 {{#each books}}
                 <tr>
-                <th scope="row">{{id}}</th>
-                <td>{{book_title}}</td>
-                <td>{{author_name}}</td>
-                <td>
-                    {{#if read}}
-                    <select id="Select" class="form-select">
-                        <option selected="true">Read</option>
-                        <option>Not Read</option>
-                    </select>
-                    {{else}}
-                    <select id="Select" class="form-select">
-                        <option>Read</option>
-                        <option selected="true">Not Read</option>
-                    </select>
-                    {{/if}}
-                </td>
-                <td><button type="button" class="btn btn-danger">X</button></td>
+                    <td><img src="{{image}}" style="height: 130px;"></img></td>
+                    <td><a href="{{book_link}}" target="_blank">{{book_title}}</a></td>
+                    <td>{{author_name}}</td>
+                    <td>
+                        <form action="/booklist/toggle" method="post">
+                            <input type="hidden" name="id" value="{{Library.id}}"/>
+                            {{#if Library.read}}
+                                <input type="hidden" name="read" value="false"/>
+                                <button type="submit" class="btn btn-success btn-sm" style="border-radius: 15px; width: 90px;">Read</button>
+                            {{else}}
+                                <input type="hidden" name="read" value="true"/>                        
+                                <button type="submit" class="btn btn-outline-secondary btn-sm" style="border-radius: 15px; width: 90px;">Not Read</button>
+                            {{/if}}
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/booklist/delete" method="post">
+                            <input type="hidden" name="id" value="{{Library.id}}"/>
+                            <button type="submit" class="btn btn-outline-danger btn-sm" style="border-radius: 15px;">Delete</button>
+                        </form>
+                    </td>
                 </tr>
                   {{/each}}
             </tbody>

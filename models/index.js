@@ -3,11 +3,11 @@ const Books = require("./Books");
 const Library = require("./Library");
 
 User.belongsToMany(Books, {
-    through: 'library'
+    through: Library
 });
 
 Books.belongsToMany(User, {
-    through: 'library'
+    through: Library
 })
 
 module.exports = { User, Books, Library };

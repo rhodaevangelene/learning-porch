@@ -6,10 +6,9 @@ class Books extends Model {}
 Books.init(
     {
         id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
-            primaryKey: true,
-            autoIncrement: true
+            primaryKey: true
         },
         book_title: {
             type: DataTypes.STRING,
@@ -18,6 +17,14 @@ Books.init(
         author_name: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        book_link: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        image: {
+            type: DataTypes.STRING,
+            allowNull: true
         },
         // read: {
         //     type: DataTypes.BOOLEAN,
