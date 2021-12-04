@@ -48,20 +48,7 @@ router.get('/courses', (req, res) => {
 
 router.get('/bookshelf', (req, res) => {
   if(req.session.loggedIn) {
-    console.log("finding all books");
-    Books.findAll({})
-    .then(response => {
-      if(!response) {
-        res.status(404).json({ message: 'No books found' });
-        return;
-      }
-      console.log("allbooks added " + JSON.stringify(response));
-      res.render('bookshelf', {books: response, loggedIn: req.session.loggedIn});
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+    res.render('bookshelf', {loggedIn: req.session.loggedIn});
   }
   else {
     res.status(401).end();
@@ -84,6 +71,86 @@ router.get('/booklist', (req, res) => {
         }
         console.log("Books: " + JSON.stringify(dbUserData.Books));
         res.render('booklist', {books: dbUserData.Books, loggedIn: req.session.loggedIn});
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  }
+  else {
+    res.status(401).end();
+  }
+});
+
+router.post('/booklist/add', (req, res) => {
+  if(req.session.loggedIn) {
+    console.log("Adding Books for user: " + req.session.user_id);
+    console.log("req: " + JSON.stringify(req.body));
+    Books.upsert(
+      {
+        id: req.body.id,
+        book_title: req.body.title,
+        author_name: req.body.author,
+        book_link: req.body.book_link,
+        image: req.body.image
+      }
+    )
+    .then(function(rows){
+      Library.upsert(
+        {
+          book_id: req.body.id,
+          user_id: req.session.user_id,
+          read: false
+        }
+      )
+      .then(function(rows){
+        res.redirect("/booklist");
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+  }
+  else {
+    res.status(401).end();
+  }
+});
+
+router.post('/booklist/toggle', (req, res) => {
+  if(req.session.loggedIn) {
+    console.log("Toggling read status books for user: " + req.session.user_id);
+    console.log("req: " + JSON.stringify(req.body));
+    Library.update(
+      {read: req.body.read},
+      {where: {id: req.body.id}}
+    )
+      .then(function(rows){
+        res.redirect("/booklist");
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  }
+  else {
+    res.status(401).end();
+  }
+});
+
+router.post('/booklist/delete', (req, res) => {
+  if(req.session.loggedIn) {
+    console.log("Toggling read status books for user: " + req.session.user_id);
+    console.log("req: " + JSON.stringify(req.body));
+    Library.destroy(
+      {where: {id: req.body.id}}
+    )
+      .then(function(rows){
+        res.redirect("/booklist");
       })
       .catch(err => {
         console.log(err);
