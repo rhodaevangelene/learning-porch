@@ -57,9 +57,9 @@ Libraries: Express.js, Node.js, SQL, Sequelize, Bootstrap, EJS
 
 ## Wireframe
 
-
-
-
+![login and home screen wireframe photo](./screenshots/wireframe-login-homepage.png)
+![bookshelf and booklist wireframe photo](./screenshots/wireframe-bookshelf-list.png)
+![notes wireframe photo](./screenshots/wireframe-notes.png)
 
 ## Challenges
 
@@ -94,13 +94,18 @@ At the time of this submission, our team has done it's best to meet all the requ
 
 ## Screenshots of Web Application
 
-
-
+![Login screen](./screenshots/login-page.png)
+![signup screen](./screenshots/signup-page.png)
+![Home page](./screenshots/home-page.png)
+![bookshelf page](./screenshots/bookshelf.png)
+![bookshelf searched item](./screenshots/bookshelf-search.png)
+![book saved to booklist](./screenshots/booklist.png)
+![notes page](./screenshots/notes.png)
 
 
 ## Links
 
-Deployed Application:
+Deployed Application:  https://the-learning-porch.herokuapp.com/
 
 Github Repo: https://github.com/ToiletTakos/learning-porch
 
