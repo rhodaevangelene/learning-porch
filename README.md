@@ -107,7 +107,7 @@ At the time of this submission, our team has done it's best to meet all the requ
 
 Deployed Application:  https://the-learning-porch.herokuapp.com/
 
-Github Repo: https://github.com/ToiletTakos/learning-porch
+Github Repo: https://github.com/rhodaevangelene/learning-porch
 
 
 ## Closing Remarks
