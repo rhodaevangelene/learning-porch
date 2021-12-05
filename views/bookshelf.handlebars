@@ -1,0 +1,90 @@
+<div
+  class="bg-image p-5 position"
+  style="background-image: url('../images/banner.jpg');">
+</div>
+<div class="container m-5">
+    <h3>Bookshelf</h3>
+    <div class="card p-2 border border-3 rounded">
+        <div class="row">
+            <h5>Search for books</h5>
+        </div>
+        <div class="row row-12">
+            <div class="col-6"><input type="text" class="form-control" placeholder="Title" id="title"></div>
+            <div class="col-5"><input type="text" class="form-control" placeholder="Author" id="author"></div>
+            <div class="col-1"><button type="submit" class="btn btn-primary" onclick="searchBook()">Search</button></div>
+        </div>
+    </div>
+        <div id="result-div">
+        </div>
+        <template id="dataRow">
+            <tr>
+                <td class="align-middle"><img src={value1} style="height: 130px;"/></td>
+                <td class="align-middle"><a href={value4} target="_blank">{value2}</a></td>
+                <td class="align-middle">{value3}</td>
+                <td class="align-middle">
+                    <form action="/booklist/add" method="post">
+                        <input type="hidden" name="id" value={value5}></input>
+                        <input type="hidden" name="title" value={value2}></input>
+                        <input type="hidden" name="author" value={value3}></input>
+                        <input type="hidden" name="book_link" value={value4}></input>
+                        <input type="hidden" name="image" value={value1}></input>
+                        <button type="submit" class="btn btn-success btn-sm">Add Book</button>
+                    </form>
+                </td>
+            </tr>
+        </template>
+</div>
+
+<script src="../javascript/logout.js"></script>
+<script>
+    function searchBook() {
+        const title = document.getElementById("title").value;
+        const author = document.getElementById("author").value;
+        console.log('Title: ' + title + ', Author: ' + author);
+        var q = "";
+        if(title){
+            q=title;
+        }
+        if(author){
+            if(title) {
+                q = q + "+inauthor:" + author
+            } else {
+                q = "inauthor:" + author
+            }
+        }
+        const url = "https://www.googleapis.com/books/v1/volumes?q=" + q;
+        console.log('URL: ' + url);
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const template = document.getElementById("dataRow").innerHTML;
+                
+                var trHtml = "";
+                for(let item of data.items)
+                {
+                    let t = template;
+                    t = t.replace(/{value1}/g, item.volumeInfo.imageLinks.thumbnail);
+                    t = t.replace(/{value2}/g, item.volumeInfo.title);
+                    t = t.replace(/{value3}/g, item.volumeInfo.authors);
+                    t = t.replace(/{value4}/g, item.volumeInfo.previewLink);
+                    t = t.replace(/{value5}/g, item.id);
+                    trHtml += t;
+                }
+                var resHtml = "<table class=\"table table-hover mt-1\" id=\"result_table\">"
+                    + "<thead>"
+                    + "   <tr>"
+                    + "   <th scope=\"col\"></th>"
+                    + "   <th scope=\"col\">Title</th>"
+                    + "   <th scope=\"col\">Author(s)</th>"
+                    + "   <th scope=\"col\">Add Book</th>"
+                    + "  </tr>"
+                    + "</thead>"
+                    + "<tbody>"
+                    + trHtml
+                    + "</tbody>"
+                    + "</table>";
+                
+                document.getElementById('result-div').innerHTML = resHtml;
+            });        
+    }
+</script>
